@@ -1,8 +1,21 @@
-import React from 'react'
+import Link from "next/link";
+import UsersTable from "./UsersTable";
 
-const UsersPage = () => {
+interface Props {
+    searchParams: {
+        sortOrder: string;
+        sortDirection: string;
+    }
+}
+
+const UsersPage = ({ searchParams: { sortOrder, sortDirection } }: Props) => {
     return (
-        <div>UsersPage</div>
+        <>
+            <Link href="/users/new" className='btn'>New User</Link>
+            <UsersTable
+                sortOrder={sortOrder}
+                sortDirection={sortDirection} />
+        </>
     )
 }
 

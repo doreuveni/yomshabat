@@ -1,46 +1,43 @@
-'use client'
 import React from 'react'
+import styles from './MainScreen.module.css'
+
 
 interface Props {
-    todos: string[]
-    handleDelete: (index: number) => void
+    todosArray: string[]
+    onDelete: (index: number) => void
 }
 
-const MainScreen = ({ todos, handleDelete }: Props) => {
 
-
+const MainScreen = ({ todosArray, onDelete }: Props) => {
+    if (!todosArray) {
+        return <div>no todos available</div>
+    }
     return (
-        <div>
-            <p className="main-victor-p">Hello Victor!</p>
-            <div
-                className="container"
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '20px',
-                    padding: '10px'
-                }}
-            >
-
-                {todos.map((todo, index) => (
-                    <div key={index}
-                        className="sticky-note-container"
-                    >
-                        <textarea
-                            value={todo}
-                            readOnly
-                            className="sticky-note"
-
-                        ></textarea>
-                        <button
-                            onClick={() => handleDelete(index)}
-                            className="delete-button"
-                        >X</button>
+        <>
+            <div className="hero">
+                <div className="hero-content flex justify-center w-full">
+                    <div className="max-w-full md:max-w-md">
+                        <h1 className="text-4xl font-bold mb-3 text-center">Hello Victor!</h1>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.stickyNotesGrid}>
+                {todosArray.map((todo, index) => (
+                    <div className={styles.stickyNoteContainer} key={index}>
+                        <textarea className="rounded-lg w-full
+                                             bg-yellow-50 
+                                             shadow-lg 
+                                             border-none 
+                                             p-2.5 
+                                             min-h-[100px] 
+                                             resize-none"
+                            value={todo} readOnly />
+                        <button className={styles.deleteButton} onClick={() => onDelete(index)}>X</button>
                     </div>
                 ))}
-
             </div>
-        </div>
+
+        </>
     )
 }
 

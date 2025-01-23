@@ -1,33 +1,29 @@
-'use client'
 import React, { useState } from 'react'
 
 interface Props {
-    capturedText: (data: string) => void
+    handleSubmit: (data: string) => void
 
 }
 
-const NewTodo = ({ capturedText }: Props) => {
+const NewTodo = ({ handleSubmit }: Props) => {
+
+
     const [inputValue, setInputValue] = useState('')
 
-    const handleSubmit = () => {
-        capturedText(inputValue)
+    const onSubmit = () => {
+        handleSubmit(inputValue)
         setInputValue('')
     }
 
     return (
-        <div className="form-group">
-            <label htmlFor="todotext" style={{ marginBottom: '10px', textAlign: 'center' }}> Write a new todo</label>
-            <textarea onChange={(e) => setInputValue(e.target.value)}
-                value={inputValue}
-                style={{ marginBottom: '10px', backgroundColor: '#FFFFE0}' }}
-                className="form-control"
-                id="todotext"
-                rows={3}
-                placeholder="Victor Nahum" />
-            <button onClick={handleSubmit} className="btn btn-primary" style={{ marginBottom: '10px' }}>Submit</button>
+        <div className="mb-3">
+            <p>Add new note</p>
+            <label htmlFor="textTodo" className="form-label" aria-placeholder="hello"></label>
+            <textarea onChange={(e) => setInputValue(e.target.value)} className="form-control mb-3" id="textTodo" rows={3} value={inputValue}></textarea>
+            <button onClick={onSubmit} className="btn btn-primary" value={inputValue}>Submit</button>
         </div>
+
     )
 }
 
 export default NewTodo
-
